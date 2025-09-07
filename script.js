@@ -1,9 +1,7 @@
-const form = document.getElementById("infoForm");
+const button = document.getElementById("button");
 const urlDisplay = document.getElementById("url");
 
-form.addEventListener("submit", function (event) {
-  event.preventDefault(); // prevent reload
-
+button.addEventListener("click", function () {
   const name = document.getElementById("name").value.trim();
   const year = document.getElementById("year").value.trim();
 
@@ -13,9 +11,9 @@ form.addEventListener("submit", function (event) {
   if (name) params.append("name", name);
   if (year) params.append("year", year);
 
-  // Construct final URL
-  const finalUrl = params.toString() ? baseUrl + "?" + params.toString() : baseUrl;
+  const finalUrl = params.toString()
+    ? baseUrl + "?" + params.toString()
+    : baseUrl;
 
-  // Update display
   urlDisplay.textContent = finalUrl;
 });
