@@ -1,17 +1,21 @@
-// your code here
 const form = document.getElementById("infoForm");
 const urlDisplay = document.getElementById("url");
 
 form.addEventListener("submit", function (event) {
-  event.preventDefault(); // prevent page reload
+  event.preventDefault(); // prevent reload
 
-  const name = document.getElementById("name").value;
-  const year = document.getElementById("year").value;
+  const name = document.getElementById("name").value.trim();
+  const year = document.getElementById("year").value.trim();
 
-  // Construct the query string
   const baseUrl = "https://localhost:8080/";
-  const queryString = `?name=${encodeURIComponent(name)}&year=${encodeURIComponent(year)}`;
+  const params = new URLSearchParams();
 
-  // Update the URL display
-  urlDisplay.textContent = baseUrl + queryString;
+  if (name) params.append("name", name);
+  if (year) params.append("year", year);
+
+  // Construct final URL
+  const finalUrl = params.toString() ? baseUrl + "?" + params.toString() : baseUrl;
+
+  // Update display
+  urlDisplay.textContent = finalUrl;
 });
