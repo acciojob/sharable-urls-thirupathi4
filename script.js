@@ -1,20 +1,17 @@
 // your code here
-const button = document.getElementById('button');
-    const urlElement = document.getElementById('url');
+const form = document.getElementById("infoForm");
+const urlDisplay = document.getElementById("url");
 
-    button.addEventListener('click', function() {
-      const name = document.getElementById('name').value.trim();
-      const year = document.getElementById('year').value.trim();
+form.addEventListener("submit", function (event) {
+  event.preventDefault(); // prevent page reload
 
-      let baseUrl = "https://localhost:8080/";
-      let params = [];
+  const name = document.getElementById("name").value;
+  const year = document.getElementById("year").value;
 
-      if (name) params.push(`name=${encodeURIComponent(name)}`);
-      if (year) params.push(`year=${encodeURIComponent(year)}`);
+  // Construct the query string
+  const baseUrl = "https://localhost:8080/";
+  const queryString = `?name=${encodeURIComponent(name)}&year=${encodeURIComponent(year)}`;
 
-      if (params.length > 0) {
-        baseUrl += "?" + params.join("&");
-      }
-
-      urlElement.textContent = baseUrl;
-    });
+  // Update the URL display
+  urlDisplay.textContent = baseUrl + queryString;
+});
